@@ -45,3 +45,7 @@ next-env.d.ts
 *.swp
 *.swo
 
+# Static site - original images (do not commit)
+/images-backup
+images-backup
+

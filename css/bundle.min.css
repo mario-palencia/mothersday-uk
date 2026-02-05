@@ -1,0 +1,758 @@
+﻿/* Mother's Day UK â€” Design System (60-30-10, Awwwards-grade) */
+:root {
+  /* 60% â€” Dominant: neutrals & whitespace */
+  --color-bg: #FAFAFA;
+  --color-bg-card: #FFFFFF;
+  --color-bg-elevated: #FFFFFF;
+
+  /* 30% â€” Secondary: soft greys & surfaces */
+  --color-surface: #F5F5F5;
+  --color-border: rgba(0, 0, 0, 0.06);
+  --color-border-strong: rgba(0, 0, 0, 0.1);
+
+  /* 10% â€” Accent: brand (Mother's Day rose) */
+  --color-accent: #C2185B;
+  --color-accent-hover: #AD1457;
+  --color-accent-muted: rgba(194, 24, 91, 0.12);
+  --color-accent-soft: #F8BBD9;
+
+  /* Typography â€” display vs body */
+  --color-text: #0D0D0D;
+  --color-text-secondary: #525252;
+  --color-text-muted: #737373;
+
+  --font-display: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Scale: aggressive hierarchy */
+  --text-display: clamp(2.75rem, 8vw, 4.5rem);
+  --text-h1: clamp(2rem, 4vw, 3rem);
+  --text-h2: clamp(1.5rem, 3vw, 2.25rem);
+  --text-body: 1.0625rem;
+  --text-body-lg: 1.125rem;
+  --text-caption: 0.9375rem;
+  --line-height-tight: 1.15;
+  --line-height-body: 1.7;
+  --letter-spacing-tight: -0.02em;
+
+  /* Spacing â€” generous whitespace */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --section-padding-y: clamp(3rem, 8vw, 6rem);
+  --container-max: 1280px;
+  --container-gutter: clamp(1.25rem, 4vw, 2.5rem);
+
+  /* Radii â€” subtle rounded */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  /* Shadows â€” soft, diffuse depth */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0 32px 80px rgba(0, 0, 0, 0.12), 0 12px 32px rgba(0, 0, 0, 0.06);
+  --shadow-accent: 0 8px 32px rgba(194, 24, 91, 0.2);
+
+  /* Motion */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration: 0.3s;
+  --transition-all: all var(--duration) var(--ease);
+
+  /* Hero (crawler-safe) */
+  --hero-height: min(1080px, 100vh);
+}
+
+@supports (height: 100dvh) {
+  :root {
+    --hero-height: min(1080px, 100dvh);
+  }
+}
+
+/* Self-hosted fonts - font-display: optional for LCP/CLS (README) */
+/* Download: Invoke-WebRequest -Uri "https://rsms.me/inter/font-files/Inter-Regular.woff2" -OutFile "fonts/inter-regular.woff2" */
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: optional;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: optional;
+}
+
+.glide{position:relative;width:100%;box-sizing:border-box}.glide *{box-sizing:inherit}.glide__track{overflow:hidden}.glide__slides{position:relative;width:100%;list-style:none;backface-visibility:hidden;transform-style:preserve-3d;touch-action:pan-Y;overflow:hidden;margin:0;padding:0;white-space:nowrap;display:flex;flex-wrap:nowrap;will-change:transform}.glide__slides--dragging{user-select:none}.glide__slide{width:100%;height:100%;flex-shrink:0;white-space:normal;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}.glide__slide a{user-select:none;-webkit-user-drag:none;-moz-user-select:none;-ms-user-select:none}.glide__arrows{-webkit-touch-callout:none;user-select:none}.glide__bullets{-webkit-touch-callout:none;user-select:none}.glide--rtl{direction:rtl}.glide__lazy__loaded{-webkit-animation:fadeInFromNone .5s ease-in 0s forwards;animation:fadeInFromNone .5s ease-in 0s forwards}@keyframes fadeInFromNone{0%{visibility:hidden;opacity:0}1%{visibility:visible;opacity:0}100%{visibility:visible;opacity:1}}
+
+/* Mother's Day UK â€” Total Revamp (Awwwards-grade UI) */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: var(--transition-all);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+  text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-gutter);
+}
+
+/* â€”â€”â€” Header: sticky + glass (backdrop blur) â€”â€”â€” */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: var(--space-md) 0;
+  background: rgba(255, 255, 255, 0.72);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  transition: var(--transition-all);
+}
+
+.site-header__inner,
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+
+.site-header__logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-text);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  transition: var(--transition-all);
+}
+
+.site-header__logo:hover {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.site-header__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.site-header__nav a {
+  color: var(--color-text-secondary);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  transition: var(--transition-all);
+}
+
+.site-header__nav a:hover {
+  color: var(--color-accent);
+  background: var(--color-accent-muted);
+}
+
+/* â€”â€”â€” Hero: display typography + whitespace â€”â€”â€” */
+.hero {
+  height: var(--hero-height);
+  min-height: var(--hero-height);
+  max-height: var(--hero-height);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero__background {
+  position: absolute;
+  inset: 0;
+  max-height: var(--hero-height);
+  overflow: hidden;
+}
+
+.hero__img,
+.hero__background img {
+  width: 100%;
+  height: 100%;
+  max-height: var(--hero-height);
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+
+.hero:hover .hero__img {
+  transform: scale(1.03);
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  max-height: var(--hero-height);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.5) 60%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  padding: var(--space-2xl) var(--space-lg);
+  max-width: 42rem;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: 800;
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  margin: 0 0 var(--space-md);
+  text-shadow: 0 4px 40px rgba(0, 0, 0, 0.35);
+  transition: var(--transition-all);
+}
+
+.hero__subtitle {
+  font-size: var(--text-body-lg);
+  font-weight: 400;
+  line-height: 1.5;
+  opacity: 0.95;
+  margin: 0;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* â€”â€”â€” Section: generous padding + hierarchy â€”â€”â€” */
+.section {
+  padding: var(--section-padding-y) 0;
+}
+
+.section--features {
+  background: var(--color-surface);
+}
+
+.section--cities {
+  background: var(--color-bg);
+}
+
+.section--faq {
+  background: var(--color-bg-card);
+  border-top: 1px solid var(--color-border);
+}
+
+.section--seo {
+  background: var(--color-bg);
+  padding-bottom: var(--space-2xl);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* â€”â€”â€” Features grid: Mother's Day ideas & experiences â€”â€”â€” */
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 640px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .features-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-xl);
+  }
+}
+
+.feature-card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  transition: var(--transition-all);
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--color-border-strong);
+}
+
+.feature-card__link {
+  display: block;
+  padding: var(--space-xl);
+  color: var(--color-text);
+  text-decoration: none;
+  min-height: 100%;
+  transition: var(--transition-all);
+}
+
+.feature-card__link:hover {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.feature-card__title {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 700;
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: var(--line-height-tight);
+  margin: 0 0 var(--space-md);
+  color: var(--color-text);
+  transition: var(--transition-all);
+}
+
+.feature-card:hover .feature-card__title {
+  color: var(--color-accent);
+}
+
+.feature-card__text {
+  font-size: var(--text-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* â€”â€”â€” FAQ accordion (details/summary) â€”â€”â€” */
+.faq-list {
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.faq-item {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-md);
+  overflow: hidden;
+  background: var(--color-bg-card);
+  transition: var(--transition-all);
+}
+
+.faq-item:last-child {
+  margin-bottom: 0;
+}
+
+.faq-item[open] {
+  border-color: var(--color-accent-muted);
+  box-shadow: var(--shadow-sm);
+}
+
+.faq-item__question {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-body-lg);
+  padding: var(--space-lg) var(--space-xl);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  color: var(--color-text);
+  transition: var(--transition-all);
+}
+
+.faq-item__question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item__question::after {
+  content: "+";
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--color-accent);
+  flex-shrink: 0;
+  transition: transform var(--duration) var(--ease);
+}
+
+.faq-item[open] .faq-item__question::after {
+  transform: rotate(45deg);
+}
+
+.faq-item__question:hover {
+  color: var(--color-accent);
+}
+
+.faq-item__answer {
+  padding: 0 var(--space-xl) var(--space-lg);
+}
+
+.faq-item__answer p {
+  margin: 0;
+  padding-top: var(--space-xs);
+  font-size: var(--text-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text-secondary);
+}
+
+/* â€”â€”â€” SEO content block â€”â€”â€” */
+.seo-content {
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.seo-content p {
+  font-size: var(--text-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.section__title {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  font-weight: 800;
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: var(--line-height-tight);
+  color: var(--color-text);
+  margin: 0 0 var(--space-md);
+}
+
+.section__intro {
+  font-size: var(--text-body-lg);
+  line-height: var(--line-height-body);
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--space-2xl);
+  max-width: 36rem;
+}
+
+/* â€”â€”â€” Bento grid: asymmetric city cards â€”â€”â€” */
+.city-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: minmax(200px, auto);
+  gap: var(--space-lg);
+}
+
+@media (min-width: 640px) {
+  .city-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .city-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, minmax(280px, 1fr));
+    gap: var(--space-xl);
+  }
+
+  .city-card:first-child {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .city-card:nth-child(2) {
+    grid-column: span 2;
+  }
+
+  .city-card:nth-child(3) {
+    grid-column: span 2;
+  }
+}
+
+.city-card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transition: var(--transition-all);
+  border: 1px solid var(--color-border);
+}
+
+.city-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--color-border-strong);
+}
+
+.city-card__link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 260px;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: var(--transition-all);
+}
+
+.city-card__link:hover {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.city-card__img-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 160px;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+@media (min-width: 1024px) {
+  .city-card:first-child .city-card__img-wrap {
+    aspect-ratio: 16 / 12;
+  }
+}
+
+.city-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease);
+}
+
+.city-card:hover .city-card__img {
+  transform: scale(1.06);
+}
+
+.city-card__name {
+  display: block;
+  padding: var(--space-lg) var(--space-xl);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-text);
+  transition: var(--transition-all);
+}
+
+.city-card:hover .city-card__name {
+  color: var(--color-accent);
+}
+
+/* â€”â€”â€” CTA button: lift on hover â€”â€”â€” */
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md) var(--space-xl);
+  background: var(--color-accent);
+  color: #fff !important;
+  font-weight: 600;
+  font-size: var(--text-caption);
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  min-height: 48px;
+  box-shadow: var(--shadow-accent);
+  transition: var(--transition-all);
+}
+
+.cta-button:hover {
+  background: var(--color-accent-hover);
+  color: #fff !important;
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(194, 24, 91, 0.35);
+}
+
+.cta-button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.breadcrumb {
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-md);
+}
+
+.city-nav {
+  margin: var(--space-lg) 0 0;
+  font-size: var(--text-body);
+}
+
+.city-nav a {
+  margin-right: var(--space-md);
+  transition: var(--transition-all);
+}
+
+/* â€”â€”â€” Glide â€”â€”â€” */
+.glide__bullet {
+  cursor: default;
+  pointer-events: none;
+}
+
+.glide__slide {
+  padding: 0 var(--space-sm);
+}
+
+/* â€”â€”â€” Plan cards (city pages) â€”â€”â€” */
+.plan-card {
+  display: block;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  transition: var(--transition-all);
+}
+
+.plan-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.plan-card__image-wrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.plan-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease);
+}
+
+.plan-card:hover .plan-card__image {
+  transform: scale(1.05);
+}
+
+.plan-card__body {
+  padding: var(--space-lg);
+}
+
+.plan-card__title {
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0 0 var(--space-xs);
+}
+
+.plan-card__venue {
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-sm);
+}
+
+.plan-card__price {
+  font-weight: 700;
+  font-size: 1.0625rem;
+  color: var(--color-accent);
+}
+
+/* â€”â€”â€” Footer: clean, minimal â€”â€”â€” */
+.site-footer {
+  padding: var(--space-3xl) 0;
+  border-top: 1px solid var(--color-border);
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+  background: var(--color-bg-card);
+}
+
+.site-footer__copy {
+  margin: 0 0 var(--space-sm);
+}
+
+.site-footer a {
+  color: var(--color-text-muted);
+  transition: var(--transition-all);
+}
+
+.site-footer a:hover {
+  color: var(--color-accent);
+}
+
+.site-footer a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Mother's Day UK - Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.section--animate {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.glide__slide {
+  transition: transform 0.3s ease;
+}
+

@@ -1,0 +1,78 @@
+/* Mother's Day UK — Design System (60-30-10, Awwwards-grade) */
+:root {
+  /* 60% — Dominant: neutrals & whitespace */
+  --color-bg: #FAFAFA;
+  --color-bg-card: #FFFFFF;
+  --color-bg-elevated: #FFFFFF;
+
+  /* 30% — Secondary: soft greys & surfaces */
+  --color-surface: #F5F5F5;
+  --color-border: rgba(0, 0, 0, 0.06);
+  --color-border-strong: rgba(0, 0, 0, 0.1);
+
+  /* 10% — Accent: brand (Mother's Day rose) */
+  --color-accent: #C2185B;
+  --color-accent-hover: #AD1457;
+  --color-accent-muted: rgba(194, 24, 91, 0.12);
+  --color-accent-soft: #F8BBD9;
+
+  /* Typography — display vs body */
+  --color-text: #0D0D0D;
+  --color-text-secondary: #525252;
+  --color-text-muted: #737373;
+
+  --font-display: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Scale: aggressive hierarchy */
+  --text-display: clamp(2.75rem, 8vw, 4.5rem);
+  --text-h1: clamp(2rem, 4vw, 3rem);
+  --text-h2: clamp(1.5rem, 3vw, 2.25rem);
+  --text-body: 1.0625rem;
+  --text-body-lg: 1.125rem;
+  --text-caption: 0.9375rem;
+  --line-height-tight: 1.15;
+  --line-height-body: 1.7;
+  --letter-spacing-tight: -0.02em;
+
+  /* Spacing — generous whitespace */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --section-padding-y: clamp(3rem, 8vw, 6rem);
+  --container-max: 1280px;
+  --container-gutter: clamp(1.25rem, 4vw, 2.5rem);
+
+  /* Radii — subtle rounded */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  /* Shadows — soft, diffuse depth */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0 32px 80px rgba(0, 0, 0, 0.12), 0 12px 32px rgba(0, 0, 0, 0.06);
+  --shadow-accent: 0 8px 32px rgba(194, 24, 91, 0.2);
+
+  /* Motion */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration: 0.3s;
+  --transition-all: all var(--duration) var(--ease);
+
+  /* Hero (crawler-safe) */
+  --hero-height: min(1080px, 100vh);
+}
+
+@supports (height: 100dvh) {
+  :root {
+    --hero-height: min(1080px, 100dvh);
+  }
+}

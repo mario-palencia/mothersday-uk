@@ -1,0 +1,13 @@
+/* Mother's Day UK - Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.section--animate {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.glide__slide {
+  transition: transform 0.3s ease;
+}

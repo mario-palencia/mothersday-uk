@@ -58,15 +58,15 @@ steps:
 
 # Variables de sustitución (pueden ser sobrescritas en el trigger)
 substitutions:
-  _SERVICE_NAME: 'celebrate-valentines'
+  _SERVICE_NAME: 'celebrate-mothersday-uk'
   _REGION: 'us-east4'
   _REPOSITORY: 'docker-repo'
 
-# Opciones de build: más RAM para next build (972 páginas). E2_HIGHMEM_8 = 8 vCPU, 64GB RAM
+# Opciones de build (sitio estático: menos recursos que Next.js)
 options:
-  machineType: 'E2_HIGHMEM_8'
+  machineType: 'E2_MEDIUM'
   logging: CLOUD_LOGGING_ONLY
-  diskSizeGb: 100
+  diskSizeGb: 20
 
-# Timeout del build (10 minutos)
-timeout: 600s
+# Timeout del build (5 minutos)
+timeout: 300s
