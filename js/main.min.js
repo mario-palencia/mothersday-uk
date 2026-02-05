@@ -59,8 +59,24 @@
     }
   }
 
+  function initHeaderScroll() {
+    var header = document.getElementById('site-header');
+    if (!header) return;
+    var threshold = 60;
+    function updateHeader() {
+      if (window.scrollY > threshold) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
+    }
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    updateHeader();
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initNavigation();
+    initHeaderScroll();
     initGlides();
     initVideoCarousel();
   });

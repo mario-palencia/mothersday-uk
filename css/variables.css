@@ -1,41 +1,56 @@
-/* Mother's Day UK — Design System (60-30-10, Awwwards-grade) */
+/* Mother's Day UK — Spring in London (CRO + SEO Expert) */
 :root {
-  /* 60% — Dominant: neutrals & whitespace */
-  --color-bg: #FAFAFA;
+  /* ——— Paleta Spring in London ——— */
+  /* Primario: rosa pastel sofisticado */
+  --color-primary: #F3D1DC;
+  --color-primary-soft: #FAE8ED;
+  --color-primary-muted: rgba(243, 209, 220, 0.4);
+
+  /* Fondo: blancos rotos / crema suave (menos fatiga visual) */
+  --color-bg: #FAFAF9;
   --color-bg-card: #FFFFFF;
   --color-bg-elevated: #FFFFFF;
+  --color-surface: #F5F4F3;
+  /* Footer: tono distinto para marcar el cierre del sitio (verde muy suave) */
+  --color-footer-bg: #E8EDEA;
+  --color-border: rgba(46, 93, 75, 0.08);
+  --color-border-strong: rgba(46, 93, 75, 0.15);
 
-  /* 30% — Secondary: soft greys & surfaces */
-  --color-surface: #F5F5F5;
-  --color-border: rgba(0, 0, 0, 0.06);
-  --color-border-strong: rgba(0, 0, 0, 0.1);
+  /* CTA / Acento: verde bosque profundo (contraste fuerte, premium) */
+  --color-accent: #2E5D4B;
+  --color-accent-hover: #244736;
+  --color-accent-muted: rgba(46, 93, 75, 0.12);
+  --color-accent-soft: #E8F0ED;
 
-  /* 10% — Accent: brand (Mother's Day rose) */
-  --color-accent: #C2185B;
-  --color-accent-hover: #AD1457;
-  --color-accent-muted: rgba(194, 24, 91, 0.12);
-  --color-accent-soft: #F8BBD9;
+  /* Oro viejo (detalles, badges, urgencia) */
+  --color-gold: #D4AF37;
+  --color-gold-soft: rgba(212, 175, 55, 0.15);
 
-  /* Typography — display vs body */
-  --color-text: #0D0D0D;
-  --color-text-secondary: #525252;
-  --color-text-muted: #737373;
+  /* Texto (WCAG AA) */
+  --color-text: #1A1A1A;
+  --color-text-secondary: #4A4A4A;
+  --color-text-muted: #6B6B6B;
+  --color-text-on-accent: #FFFFFF;
 
-  --font-display: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* ——— Tipografía: London & Friendly ——— */
+  /* Headers: Playfair Display (serifa, elegante, tradición inglesa) */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  /* Body: Lato (sans-serif, legible, friendly) */
+  --font-body: 'Lato', system-ui, -apple-system, sans-serif;
 
-  /* Scale: aggressive hierarchy */
-  --text-display: clamp(2.75rem, 8vw, 4.5rem);
-  --text-h1: clamp(2rem, 4vw, 3rem);
-  --text-h2: clamp(1.5rem, 3vw, 2.25rem);
+  /* Escala tipográfica */
+  --text-display: clamp(2.5rem, 7vw, 4.25rem);
+  --text-h1: clamp(2rem, 4vw, 2.75rem);
+  --text-h2: clamp(1.5rem, 3vw, 2rem);
   --text-body: 1.0625rem;
   --text-body-lg: 1.125rem;
   --text-caption: 0.9375rem;
-  --line-height-tight: 1.15;
+  --line-height-tight: 1.2;
   --line-height-body: 1.7;
   --letter-spacing-tight: -0.02em;
+  --letter-spacing-wide: 0.04em;
 
-  /* Spacing — generous whitespace */
+  /* ——— Espaciado (whitespace generoso, mobile first) ——— */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
@@ -44,35 +59,37 @@
   --space-2xl: 3rem;
   --space-3xl: 4rem;
   --space-4xl: 6rem;
-  --section-padding-y: clamp(3rem, 8vw, 6rem);
+  --space-5xl: 8rem;
+  --section-padding-y: clamp(3.5rem, 10vw, 6.5rem);
   --container-max: 1280px;
-  --container-gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --container-gutter: clamp(1.25rem, 5vw, 2.5rem);
 
-  /* Radii — subtle rounded */
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --radius-xl: 32px;
+  /* Radii (cards 12px como pedido) */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
   --radius-full: 9999px;
 
-  /* Shadows — soft, diffuse depth */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.04);
-  --shadow-hover: 0 32px 80px rgba(0, 0, 0, 0.12), 0 12px 32px rgba(0, 0, 0, 0.06);
-  --shadow-accent: 0 8px 32px rgba(194, 24, 91, 0.2);
+  /* Sombras (suaves, elegantes) */
+  --shadow-sm: 0 2px 12px rgba(46, 93, 75, 0.06);
+  --shadow-md: 0 4px 24px rgba(46, 93, 75, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 20px 50px rgba(46, 93, 75, 0.1);
+  --shadow-hover: 0 12px 40px rgba(46, 93, 75, 0.15);
+  --shadow-cta: 0 6px 24px rgba(46, 93, 75, 0.35);
+  --shadow-cta-hover: 0 10px 32px rgba(46, 93, 75, 0.4);
 
   /* Motion */
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
   --duration: 0.3s;
   --transition-all: all var(--duration) var(--ease);
 
-  /* Hero (crawler-safe) */
-  --hero-height: min(1080px, 100vh);
+  /* Hero */
+  --hero-height: min(100vh, 900px);
 }
 
 @supports (height: 100dvh) {
   :root {
-    --hero-height: min(1080px, 100dvh);
+    --hero-height: min(100dvh, 900px);
   }
 }
