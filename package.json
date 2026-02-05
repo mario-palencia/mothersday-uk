@@ -1,0 +1,39 @@
+{
+  "name": "fever-mothers-day-landing",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "export": "next build",
+    "generate-icons": "node scripts/generate-icons.js",
+    "verify-utm": "node scripts/verify-utm-cities.js"
+  },
+  "dependencies": {
+    "@types/papaparse": "^5.3.16",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.475.0",
+    "next": "^14.2.35",
+    "next-intl": "^4.7.0",
+    "papaparse": "^5.5.3",
+    "react": "^18",
+    "react-dom": "^18",
+    "tailwind-merge": "^3.4.0",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@swc/helpers": "^0.5.18",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^3.4.1",
+    "to-ico": "^1.1.5",
+    "typescript": "^5"
+  }
+}
