@@ -45,22 +45,27 @@
     var consent = getConsent();
     if (consent === null) {
       banner.classList.remove('cookie-banner--hidden');
+      if (document.body) document.body.classList.add('cookie-banner-visible');
     } else if (consent === 'accept') {
       loadGA4();
     }
     var acceptBtn = banner.querySelector('.cookie-banner__btn--accept');
     var rejectBtn = banner.querySelector('.cookie-banner__btn--reject');
+    function hideBanner() {
+      banner.classList.add('cookie-banner--hidden');
+      if (document.body) document.body.classList.remove('cookie-banner-visible');
+    }
     if (acceptBtn) {
       acceptBtn.addEventListener('click', function () {
         setConsent('accept');
-        banner.classList.add('cookie-banner--hidden');
+        hideBanner();
         loadGA4();
       });
     }
     if (rejectBtn) {
       rejectBtn.addEventListener('click', function () {
         setConsent('reject');
-        banner.classList.add('cookie-banner--hidden');
+        hideBanner();
       });
     }
   }

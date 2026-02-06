@@ -186,8 +186,19 @@ function escapeJson(s) {
   return String(s).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
 }
 
+/** Build ItemList JSON-LD for plans (experiences/events). Items need name and url. */
+function buildItemListLdJson(name, slug, items, listName) {
+  if (!items || items.length === 0) return '';
+  const itemListElement = items.map((item, i) => {
+    const url = (item.url && item.url.startsWith('http')) ? item.url : '';
+    return '{"@type":"ListItem","position":' + (i + 1) + ',"name":"' + escapeJson(item.name || '') + '"' + (url ? ',"url":"' + escapeJson(url) + '"' : '') + '}';
+  }).join(',');
+  const ld = '{"@context":"https://schema.org","@type":"ItemList","name":"' + escapeJson(listName) + '","numberOfItems":' + items.length + ',"itemListElement":[' + itemListElement + ']}';
+  return '\n  <script type="application/ld+json">\n  ' + ld + '\n  </script>';
+}
+
 function layout(opts) {
-  const { pageTitle, metaDescription, keywords, canonical, mainContent, assetDepth, city, stickyCtaUrl, stickyCtaText, breadcrumbList } = opts;
+  const { pageTitle, metaDescription, keywords, canonical, mainContent, assetDepth, city, stickyCtaUrl, stickyCtaText, breadcrumbList, itemListLdJson } = opts;
   const name = city.name;
   const slug = city.slug;
   const stickyCtaHtml = (stickyCtaUrl && stickyCtaText) ? `
@@ -209,28 +220,25 @@ function layout(opts) {
   <link rel="canonical" href="${canonical}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700&family=Playfair+Display:wght@600;700&display=optional" rel="stylesheet">
   <link rel="preload" href="${assetDepth}css/bundle.min.css" as="style">
   <link rel="stylesheet" href="${assetDepth}css/bundle.min.css">
   <link rel="icon" type="image/svg+xml" href="${FAVICON_SVG}">
   <meta property="og:type" content="website">
   <meta property="og:title" content="${escapeHtml(pageTitle)}">
   <meta property="og:description" content="${escapeHtml(metaDescription)}">
-  <meta property="og:image" content="${DOMAIN}/images/${slug}-og.jpg">
+  <meta property="og:image" content="${DOMAIN}/images/${slug}.png">
   <meta property="og:url" content="${canonical}">
   <meta property="og:locale" content="en_GB">
   <meta property="og:site_name" content="Celebrate Mother's Day UK">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(pageTitle)}">
   <meta name="twitter:description" content="${escapeHtml(metaDescription)}">
-  <meta name="twitter:image" content="${DOMAIN}/images/${slug}-og.jpg">
+  <meta name="twitter:image" content="${DOMAIN}/images/${slug}.png">
   <meta name="theme-color" content="#2E5D4B">${breadcrumbLdJson}
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  <div class="top-bar" role="complementary" aria-label="Limited availability notice">
-    <p class="top-bar__text">Places are filling up for Mother's Day — <a href="/#city-selector" class="top-bar__link">pick your city</a></p>
-  </div>
   <header class="site-header" id="site-header" role="banner">
     <div class="container site-header__inner">
       <a href="/" class="site-header__logo" aria-label="Celebrate Mother's Day home">
@@ -239,7 +247,6 @@ function layout(opts) {
       </a>
       <nav class="site-header__nav" aria-label="Main navigation">
         <a href="/">Home</a>
-        <a href="/#city-selector" class="site-header__cta cta-button" aria-label="Choose your city for Mother's Day">Pick your city</a>
       </nav>
     </div>
   </header>
@@ -287,7 +294,7 @@ ${stickyCtaHtml}
 
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"LocalBusiness","name":"Mother's Day ${escapeHtml(name)} | Celebrate Mother's Day UK","url":"${canonical}","description":"Mother's Day ${escapeHtml(name)}: things to do, gift ideas and experiences for Mum. Book Mother's Day plans, Candlelight and events on Fever.","image":"${DOMAIN}/images/${slug}.png","address":{"@type":"PostalAddress","addressLocality":"${escapeHtml(name)}","addressCountry":"GB"},"areaServed":{"@type":"City","name":"${escapeHtml(name)}"}}
-  </script>
+  </script>${itemListLdJson || ''}
   <script src="${assetDepth}js/glide.min.js" defer></script>
   <script src="${assetDepth}js/main.min.js" defer></script>
 </body>
@@ -480,6 +487,9 @@ function cityMainPage(city, feverPlans) {
     { name: 'UK', item: DOMAIN + '/' },
     { name: name, item: cityUrl }
   ];
+  const itemListLdJson = plans.length > 0
+    ? buildItemListLdJson(name, slug, plans.slice(0, 12), "Mother's Day plans in " + name)
+    : '';
   return layout({
     pageTitle: `Mother's Day ${name} 2026 | Things to Do, Gifts & Experiences`,
     metaDescription: `Mother's Day ${name}: gift ideas, things to do and experiences for Mum. Book Mother's Day plans, Candlelight & events. See Mother's Day ${name} on Fever.`,
@@ -491,7 +501,8 @@ function cityMainPage(city, feverPlans) {
     feverUrl,
     stickyCtaUrl: feverUrl,
     stickyCtaText: 'See on Fever',
-    breadcrumbList
+    breadcrumbList,
+    itemListLdJson
   });
 }
 
@@ -613,15 +624,25 @@ function citySubPage(city, type, feverPlans) {
   if (!c) return '';
   const canonical = `${DOMAIN}/${slug}/${c.path}/`;
   const mainContent = `
-    <section class="section section--subpage">
+    <section class="hero hero--subpage hero--subpage-${slug}" aria-labelledby="subpage-heading">
+      <div class="hero__background">
+        <img src="${imgBase}.png" alt="" width="1920" height="1080" loading="eager" class="hero__img" aria-hidden="true">
+      </div>
+      <div class="hero__overlay hero__overlay--subpage" aria-hidden="true"></div>
+      <div class="hero__content hero__content--subpage">
+        <div class="container">
+          <nav class="breadcrumb breadcrumb--subpage breadcrumb--hero" aria-label="Breadcrumb">
+            <a href="/">UK</a><span class="breadcrumb__sep" aria-hidden="true">›</span><a href="/${slug}/">${escapeHtml(name)}</a><span class="breadcrumb__sep" aria-hidden="true">›</span><span class="breadcrumb__current">${escapeHtml(c.h1)}</span>
+          </nav>
+          <h1 id="subpage-heading" class="hero__title hero__title--subpage">${escapeHtml(c.h1)}</h1>
+          <p class="hero__subtitle hero__subtitle--subpage">${escapeHtml(c.intro)}</p>
+          <a href="${escapeHtml(pageFeverUrl)}" class="cta-button hero__cta" target="_blank" rel="noopener noreferrer">${type === 'candlelight' ? 'See Candlelight in ' + escapeHtml(name) + ' on Fever' : 'See Mother\'s Day in ' + escapeHtml(name) + ' on Fever'}</a>
+        </div>
+      </div>
+    </section>
+    <section class="section section--subpage-actions">
       <div class="container">
-        <nav class="breadcrumb breadcrumb--subpage" aria-label="Breadcrumb">
-          <a href="/">UK</a><span class="breadcrumb__sep" aria-hidden="true">›</span><a href="/${slug}/">${escapeHtml(name)}</a><span class="breadcrumb__sep" aria-hidden="true">›</span><span class="breadcrumb__current">${escapeHtml(c.h1)}</span>
-        </nav>
-        <h1 class="section__title">${escapeHtml(c.h1)}</h1>
-        <p class="section__intro">${escapeHtml(c.intro)}</p>
-        <p><a href="${escapeHtml(pageFeverUrl)}" class="cta-button" target="_blank" rel="noopener noreferrer">${type === 'candlelight' ? 'See Candlelight concerts in ' + escapeHtml(name) + ' on Fever' : 'See Mother\'s Day in ' + escapeHtml(name) + ' on Fever'}</a></p>
-        <p><a href="/${slug}/" class="link--back">Back to Mother's Day ${escapeHtml(name)}</a></p>
+        <a href="/${slug}/" class="link--back">Back to Mother's Day ${escapeHtml(name)}</a>
       </div>
     </section>${featuredHtml}
     <section class="section section--seo" aria-labelledby="seo-subpage-heading">
@@ -637,6 +658,9 @@ function citySubPage(city, type, feverPlans) {
     { name: name, item: DOMAIN + '/' + slug + '/' },
     { name: c.h1, item: canonical }
   ];
+  const itemListLdJson = featuredPlans.length > 0
+    ? buildItemListLdJson(name, slug, featuredPlans, featuredSectionTitle)
+    : '';
   return layout({
     pageTitle: c.title,
     metaDescription: c.description,
@@ -648,7 +672,8 @@ function citySubPage(city, type, feverPlans) {
     feverUrl: pageFeverUrl,
     stickyCtaUrl: pageFeverUrl,
     stickyCtaText: type === 'candlelight' ? 'See Candlelight on Fever' : 'See on Fever',
-    breadcrumbList
+    breadcrumbList,
+    itemListLdJson
   });
 }
 

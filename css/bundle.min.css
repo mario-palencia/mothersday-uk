@@ -282,6 +282,11 @@ a:focus-visible {
   color: var(--color-primary-soft);
 }
 
+.top-bar__link:focus-visible {
+  outline: 2px solid var(--color-text-on-accent);
+  outline-offset: 2px;
+}
+
 /* â€”â€”â€” Header: sticky + Spring palette â€”â€”â€” */
 .site-header {
   position: sticky;
@@ -627,6 +632,11 @@ a:focus-visible {
   box-shadow: var(--shadow-cta-hover);
 }
 
+.cta-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 12px rgba(46, 93, 75, 0.2);
+}
+
 .cta-button:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
@@ -749,6 +759,10 @@ a:focus-visible {
   border-color: var(--color-border-strong);
 }
 
+.city-card:active {
+  transform: translateY(-2px);
+}
+
 .city-card__link {
   display: flex;
   flex-direction: column;
@@ -762,6 +776,10 @@ a:focus-visible {
 .city-card__link:hover {
   color: var(--color-text);
   text-decoration: none;
+}
+
+.city-card__link:active {
+  opacity: 0.95;
 }
 
 .city-card__img-wrap {
@@ -1050,6 +1068,10 @@ a:focus-visible {
   .site-footer {
     padding-bottom: calc(var(--space-3xl) + 80px);
   }
+  /* Cuando el banner de cookies estÃ¡ visible, subir el sticky CTA para no solaparse */
+  body.cookie-banner-visible .sticky-cta {
+    bottom: 140px;
+  }
 }
 
 /* â€”â€”â€” Footer â€”â€”â€” */
@@ -1253,6 +1275,10 @@ a:focus-visible {
   border-color: var(--color-border-strong);
 }
 
+.pick-card:active {
+  transform: translateY(-2px);
+}
+
 .pick-card__link {
   display: flex;
   flex-direction: column;
@@ -1267,6 +1293,10 @@ a:focus-visible {
 .pick-card__link:hover {
   color: var(--color-text);
   text-decoration: none;
+}
+
+.pick-card__link:active {
+  opacity: 0.95;
 }
 
 .pick-card__img-wrap {
@@ -1459,6 +1489,11 @@ a:focus-visible {
   border-color: var(--color-accent-muted);
   color: var(--color-text);
   text-decoration: none;
+}
+
+.idea-card:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 .idea-card__title {
@@ -1684,6 +1719,93 @@ a:focus-visible {
   margin-bottom: var(--space-xl);
 }
 
+/* â€”â€”â€” Subpage hero (ideas/experiences/events/candlelight): imagen ciudad + texto â€”â€”â€” */
+.hero--subpage {
+  height: 320px;
+  min-height: 280px;
+  max-height: 380px;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: var(--space-2xl);
+}
+.hero--subpage .hero__background,
+.hero--subpage .hero__overlay,
+.hero--subpage .hero__background img {
+  max-height: 380px;
+  height: 100%;
+}
+.hero__overlay--subpage {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+}
+.hero__content--subpage {
+  text-align: left;
+  padding: 0;
+  max-width: none;
+}
+.hero__title--subpage {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  margin: var(--space-sm) 0 var(--space-md);
+  color: #fff;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+}
+.hero__subtitle--subpage {
+  font-size: var(--text-body);
+  line-height: var(--line-height-body);
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0 0 var(--space-lg);
+  max-width: 36rem;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+}
+.hero--subpage .hero__cta {
+  margin: 0;
+}
+/* Breadcrumb sobre hero: texto claro */
+.breadcrumb--hero.breadcrumb--subpage a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+}
+.breadcrumb--hero.breadcrumb--subpage a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+.breadcrumb--hero .breadcrumb__sep {
+  color: rgba(255, 255, 255, 0.7);
+}
+.breadcrumb--hero .breadcrumb__current {
+  color: #fff;
+  font-weight: 600;
+}
+.section--subpage-actions {
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-md);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+@media (max-width: 767px) {
+  .hero--subpage {
+    height: 280px;
+    min-height: 240px;
+    padding-bottom: var(--space-xl);
+  }
+  .hero--subpage .hero__background,
+  .hero--subpage .hero__overlay,
+  .hero--subpage .hero__background img {
+    max-height: 280px;
+  }
+  .hero__title--subpage {
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
+  }
+  .hero__subtitle--subpage {
+    font-size: var(--text-caption);
+  }
+}
+
 .link--back {
   display: inline-flex;
   align-items: center;
@@ -1704,8 +1826,16 @@ a:focus-visible {
 }
 
 .link--back::before {
-  content: "â†";
-  font-size: 1.1em;
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+  margin-right: 0.35em;
+  vertical-align: middle;
+  flex-shrink: 0;
 }
 
 .city-nav {
@@ -1920,9 +2050,16 @@ a:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
+.cookie-banner__btn--reject:active {
+  opacity: 0.9;
+}
 /* Accept usa el mismo estilo que el resto de CTAs del sitio (verde) â€” sin overrides */
 .cookie-banner__btn--accept.cta-button {
   min-height: 48px;
+}
+.cookie-banner__btn--accept.cta-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 12px rgba(46, 93, 75, 0.2);
 }
 @media (max-width: 639px) {
   .cookie-banner {
