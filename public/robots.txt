@@ -1,9 +1,4 @@
 User-agent: *
-Allow: /_next/static/
-Allow: /_next/image/
-Allow: /api/public/
-Disallow: /_next/
-Disallow: /api/
-Disallow: /admin/
-Disallow: /private/
-Sitemap: https://celebratevalentines.com/sitemap.xml
+Allow: /
+
+Sitemap: https://celebratemothersday.co.uk/sitemap.xml

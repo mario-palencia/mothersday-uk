@@ -1,0 +1,16 @@
+{
+  "slug": "mothers-day",
+  "locale": "en-GB",
+  "domain": "https://celebratemothersday.co.uk",
+  "feverBase": "https://feverup.com",
+  "feverPathTemplate": "https://feverup.com/en/{city}/mothers-day",
+  "feverCandlelightPathTemplate": "https://feverup.com/en/{city}/candlelight-{city}",
+  "outputDataFile": "data/fever-plans-uk.json",
+  "cities": [
+    { "slug": "london", "name": "London" },
+    { "slug": "manchester", "name": "Manchester" },
+    { "slug": "birmingham", "name": "Birmingham" }
+  ],
+  "maxExperiencesPerCity": 24,
+  "maxGiftCardsPerCity": 12
+}

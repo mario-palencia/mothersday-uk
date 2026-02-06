@@ -1,36 +1,43 @@
-/* Mother's Day UK — Spring in London (CRO + SEO Expert) */
+/* Mother's Day UK — Design system: rosa pastel, blancos, dorado, acento secundario */
 :root {
-  /* ——— Paleta Spring in London ——— */
-  /* Primario: rosa pastel sofisticado */
+  /* ——— Paleta coherente (rosa pastel, blancos, texto oscuro, acentos dorados) ——— */
+  /* Primario: rosa pastel (uso puntual, no bloques grandes en home) */
   --color-primary: #F3D1DC;
   --color-primary-soft: #FAE8ED;
   --color-primary-muted: rgba(243, 209, 220, 0.4);
 
-  /* Fondo: blancos rotos / crema suave (menos fatiga visual) */
+  /* Fondo: blancos rotos / crema suave */
   --color-bg: #FAFAF9;
   --color-bg-card: #FFFFFF;
   --color-bg-elevated: #FFFFFF;
   --color-surface: #F5F4F3;
-  /* Footer: tono distinto para marcar el cierre del sitio (verde muy suave) */
-  --color-footer-bg: #E8EDEA;
-  --color-border: rgba(46, 93, 75, 0.08);
-  --color-border-strong: rgba(46, 93, 75, 0.15);
+  /* Footer: tono suave coherente con paleta (rosa muy suave) */
+  --color-footer-bg: #F8F2F4;
+  /* Bordes: tinte neutro suave (no verde chillón) */
+  --color-border: rgba(80, 60, 70, 0.08);
+  --color-border-strong: rgba(80, 60, 70, 0.14);
 
-  /* CTA / Acento: verde bosque profundo (contraste fuerte, premium) */
+  /* CTA / Acento secundario: verde suave (contraste pero no dominante) */
   --color-accent: #2E5D4B;
   --color-accent-hover: #244736;
-  --color-accent-muted: rgba(46, 93, 75, 0.12);
+  --color-accent-muted: rgba(46, 93, 75, 0.1);
   --color-accent-soft: #E8F0ED;
+  /* Neutral oscuro para gradientes CTA (evitar #1a3529 hardcodeado) */
+  --color-accent-dark: #1a3529;
 
-  /* Oro viejo (detalles, badges, urgencia) */
-  --color-gold: #D4AF37;
-  --color-gold-soft: rgba(212, 175, 55, 0.15);
+  /* Oro (valoraciones, badges, detalles premium) */
+  --color-gold: #C9A227;
+  --color-gold-soft: rgba(201, 162, 39, 0.14);
 
   /* Texto (WCAG AA) */
   --color-text: #1A1A1A;
   --color-text-secondary: #4A4A4A;
   --color-text-muted: #6B6B6B;
   --color-text-on-accent: #FFFFFF;
+  /* Neutral para sombras (mismo tinte en toda la UI) */
+  --shadow-tint: 80, 60, 70;
+  --shadow-tint-alpha: 0.06;
+  --shadow-tint-alpha-strong: 0.1;
 
   /* ——— Tipografía: London & Friendly ——— */
   /* Headers: Playfair Display (serifa, elegante, tradición inglesa) */
@@ -38,58 +45,65 @@
   /* Body: Lato (sans-serif, legible, friendly) */
   --font-body: 'Lato', system-ui, -apple-system, sans-serif;
 
-  /* Escala tipográfica */
+  /* Escala tipográfica (jerarquía clara H1 > H2 > H3) */
   --text-display: clamp(2.5rem, 7vw, 4.25rem);
-  --text-h1: clamp(2rem, 4vw, 2.75rem);
-  --text-h2: clamp(1.5rem, 3vw, 2rem);
+  --text-h1: clamp(2rem, 4.5vw, 2.875rem);
+  --text-h2: clamp(1.375rem, 3vw, 2rem);
+  --text-h3: clamp(1.125rem, 2vw, 1.375rem);
   --text-body: 1.0625rem;
   --text-body-lg: 1.125rem;
   --text-caption: 0.9375rem;
-  --line-height-tight: 1.2;
+  --line-height-tight: 1.25;
   --line-height-body: 1.7;
   --letter-spacing-tight: -0.02em;
   --letter-spacing-wide: 0.04em;
 
-  /* ——— Espaciado (whitespace generoso, mobile first) ——— */
+  /* ——— Espaciado (más aire entre secciones, mobile first) ——— */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
   --space-lg: 1.5rem;
   --space-xl: 2rem;
   --space-2xl: 3rem;
-  --space-3xl: 4rem;
+  --space-3xl: 4.5rem;
   --space-4xl: 6rem;
   --space-5xl: 8rem;
-  --section-padding-y: clamp(3.5rem, 10vw, 6.5rem);
+  --section-padding-y: clamp(4rem, 12vw, 7.5rem);
   --container-max: 1280px;
   --container-gutter: clamp(1.25rem, 5vw, 2.5rem);
 
-  /* Radii (cards 12px como pedido) */
+  /* Radii (unificado para tarjetas y componentes) */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 12px;
   --radius-xl: 20px;
   --radius-full: 9999px;
+  --card-radius: 12px;
 
-  /* Sombras (suaves, elegantes) */
-  --shadow-sm: 0 2px 12px rgba(46, 93, 75, 0.06);
-  --shadow-md: 0 4px 24px rgba(46, 93, 75, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 20px 50px rgba(46, 93, 75, 0.1);
-  --shadow-hover: 0 12px 40px rgba(46, 93, 75, 0.15);
-  --shadow-cta: 0 6px 24px rgba(46, 93, 75, 0.35);
-  --shadow-cta-hover: 0 10px 32px rgba(46, 93, 75, 0.4);
+  /* Sombras (tinte neutro coherente con paleta rosa/blanco) */
+  --shadow-sm: 0 2px 12px rgba(var(--shadow-tint), var(--shadow-tint-alpha));
+  --shadow-md: 0 4px 20px rgba(var(--shadow-tint), 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 16px 48px rgba(var(--shadow-tint), var(--shadow-tint-alpha-strong));
+  --shadow-hover: 0 12px 36px rgba(var(--shadow-tint), 0.12);
+  --shadow-cta: 0 4px 20px rgba(46, 93, 75, 0.28);
+  --shadow-cta-hover: 0 8px 28px rgba(46, 93, 75, 0.36);
+  /* Tarjetas: unificado */
+  --card-shadow: var(--shadow-md);
+  --card-shadow-hover: var(--shadow-hover);
 
-  /* Motion */
+  /* Motion (transiciones suaves) */
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
   --duration: 0.3s;
-  --transition-all: all var(--duration) var(--ease);
+  --transition-all: all 0.3s var(--ease);
 
   /* Hero */
   --hero-height: min(100vh, 900px);
+  --hero-height-mobile: min(90vh, 680px);
 }
 
 @supports (height: 100dvh) {
   :root {
     --hero-height: min(100dvh, 900px);
+    --hero-height-mobile: min(90dvh, 680px);
   }
 }

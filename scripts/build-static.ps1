@@ -1,5 +1,8 @@
 # Mother's Day UK - Build static site (bundle CSS, minify JS)
 # Run before deploy. Requires: npm install -g terser clean-css-cli (optional)
+# Optional: -RefreshFever to run fetch-fever-plans.js before generate (requires Playwright: npx playwright install chromium)
+
+param([switch]$RefreshFever)
 
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent (Split-Path -Parent $PSCommandPath)
@@ -43,7 +46,16 @@ if ($glideContent -match "Download Glide") {
     Write-Host "Download Glide.js: curl -o js/glide.min.js https://cdn.jsdelivr.net/npm/@glidejs/glide@3.6.1/dist/glide.min.js"
 }
 
-# 5. Regenerate city pages from data
+# 5. Optional: refresh plans from Fever (requires Playwright)
+if ($RefreshFever) {
+    Write-Host "Refreshing plans from Fever (fetch-fever-plans.js)..."
+    & node "$root\scripts\fetch-fever-plans.js"
+    if ($LASTEXITCODE -ne 0) {
+        Write-Warning "Fetch failed; continuing with existing data/fever-plans-uk.json"
+    }
+}
+
+# 6. Regenerate city pages from data
 & node "$root\scripts\generate-city-pages.js"
 
 Write-Host "Build complete."
