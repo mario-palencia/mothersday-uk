@@ -6,9 +6,14 @@
   "scripts": {
     "build": "node scripts/generate-city-pages.js",
     "generate-city-pages": "node scripts/generate-city-pages.js",
-    "serve": "npx serve ."
+    "serve": "npx serve .",
+    "dev": "npx serve . -l 3000",
+    "fetch-fever-plans": "node scripts/fetch-fever-plans.js"
   },
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.0"
   }
 }

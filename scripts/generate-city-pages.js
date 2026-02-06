@@ -275,6 +275,16 @@ ${stickyCtaHtml}
     </div>
   </footer>
 
+  <div id="cookie-consent-banner" class="cookie-banner cookie-banner--hidden" role="dialog" aria-label="Cookie consent">
+    <div class="cookie-banner__inner">
+      <p class="cookie-banner__text">We use cookies to measure site usage. <a href="/legal/cookies.html">Cookie Policy</a></p>
+      <div class="cookie-banner__actions">
+        <button type="button" class="cookie-banner__btn cookie-banner__btn--reject">Reject</button>
+        <button type="button" class="cookie-banner__btn cookie-banner__btn--accept cta-button">Accept</button>
+      </div>
+    </div>
+  </div>
+
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"LocalBusiness","name":"Mother's Day ${escapeHtml(name)} | Celebrate Mother's Day UK","url":"${canonical}","description":"Mother's Day ${escapeHtml(name)}: things to do, gift ideas and experiences for Mum. Book Mother's Day plans, Candlelight and events on Fever.","image":"${DOMAIN}/images/${slug}.png","address":{"@type":"PostalAddress","addressLocality":"${escapeHtml(name)}","addressCountry":"GB"},"areaServed":{"@type":"City","name":"${escapeHtml(name)}"}}
   </script>

@@ -1837,6 +1837,117 @@ a:focus-visible {
   }
 }
 
+/* â€”â€”â€” Cookie consent banner (GDPR/CCPA) â€”â€”â€” */
+/* Misma paleta que footer y CTAs del sitio: verde acento, bordes neutros, tipografÃ­a coherente */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  padding: var(--space-xl) var(--container-gutter);
+  padding-bottom: max(var(--space-xl), env(safe-area-inset-bottom));
+  background: var(--color-footer-bg);
+  border-top: 1px solid var(--color-border);
+  box-shadow: 0 -4px 24px rgba(var(--shadow-tint), 0.06);
+  font-family: var(--font-body);
+}
+.cookie-banner--hidden {
+  display: none;
+}
+.cookie-banner__inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xl);
+}
+.cookie-banner__text {
+  margin: 0;
+  font-size: var(--text-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+  flex: 1 1 300px;
+}
+.cookie-banner__text a {
+  color: var(--color-accent);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: var(--transition-all);
+}
+.cookie-banner__text a:hover {
+  color: var(--color-accent-hover);
+  border-bottom-color: var(--color-accent-hover);
+}
+.cookie-banner__text a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+.cookie-banner__actions {
+  display: flex;
+  gap: var(--space-md);
+  flex-shrink: 0;
+  align-items: center;
+}
+.cookie-banner__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md) var(--space-xl);
+  min-height: 48px;
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: var(--letter-spacing-wide);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-all);
+}
+.cookie-banner__btn--reject {
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+}
+.cookie-banner__btn--reject:hover {
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent-muted);
+  color: var(--color-text);
+}
+.cookie-banner__btn--reject:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+/* Accept usa el mismo estilo que el resto de CTAs del sitio (verde) â€” sin overrides */
+.cookie-banner__btn--accept.cta-button {
+  min-height: 48px;
+}
+@media (max-width: 639px) {
+  .cookie-banner {
+    padding: var(--space-lg) var(--container-gutter);
+    padding-bottom: max(var(--space-lg), env(safe-area-inset-bottom));
+  }
+  .cookie-banner__inner {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: var(--space-lg);
+  }
+  .cookie-banner__text {
+    font-size: var(--text-caption);
+  }
+  .cookie-banner__actions {
+    justify-content: stretch;
+    flex-direction: column;
+  }
+  .cookie-banner__btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 /* Mother's Day UK â€” Animations (entrada suave, respeta prefers-reduced-motion) */
 
 @keyframes fadeIn {

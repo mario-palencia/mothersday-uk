@@ -107,5 +107,5 @@ Write-Host ""
 Start-Sleep -Seconds 3
 Start-Process "http://localhost:3000"
 
-# Iniciar servidor
+# Iniciar servidor en puerto 3000 (npm run dev = npx serve . -l 3000)
 & $npmPath run dev

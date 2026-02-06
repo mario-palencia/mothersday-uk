@@ -22,6 +22,9 @@ npm install -g terser clean-css-cli
 
 # Run build: combine CSS, minify CSS/JS, regenerate city pages
 .\scripts\build-static.ps1
+
+# Full build including refresh from Fever (requires Playwright)
+.\scripts\build-static.ps1 -RefreshFever
 ```
 
 Manual steps (README template):
@@ -41,6 +44,16 @@ Manual steps (README template):
 5. **Regenerate city pages:**  
    `node scripts/generate-city-pages.js`
 
+### City page plans from Fever (single source of truth)
+
+All plans shown on city pages (index, ideas, experiences, events, candlelight) come from **Fever's Mother's Day landing**: `https://feverup.com/en/{city}/mothers-day`. Data is read from `data/fever-plans-uk.json`.
+
+- **Data structure:** Per city, `experiences` (plan cards) and `giftCards` (gift card carousel). Each item has `name`, `url`, `priceText`, and optionally `image` (Fever image URL).
+- **Images:** The generator uses `plan.image` when present (Fever URLs) so cards show the same images as on Fever; if missing, it falls back to the city image (e.g. `images/london.png`).
+- **Refresh from Fever (manual):** Run `npm run fetch-fever-plans` (requires Playwright: `npx playwright install chromium`). It scrapes experiences and gift cards from each city's Mother's Day page and overwrites `data/fever-plans-uk.json`. Then run `node scripts/generate-city-pages.js` to regenerate HTML. Or run a full build: `.\scripts\build-static.ps1 -RefreshFever`.
+- **Automation:** A GitHub Actions workflow (`.github/workflows/sync-fever-plans.yml`) runs on a schedule (e.g. twice daily) and on demand (workflow_dispatch). It runs fetch + generate, then commits and pushes changes to `main`. When plans are added or changed on Fever, the next sync updates the repo; the existing Cloud Build trigger on push to `main` then deploys the site with fresh data.
+- **Fallbacks:** If a city has no experiences, the generator shows generic "Top picks" linking to Fever. If there are no gift cards, it uses a small hardcoded list (names/prices) linking to the Mother's Day page.
+
 ## Project structure
 
 ```
@@ -57,8 +70,11 @@ Manual steps (README template):
 ├── images/                  # WebP + srcset; favicon here
 ├── fonts/                   # Self-hosted Inter (optional)
 ├── data/uk-cities.json      # UK cities list
+├── .github/workflows/
+│   └── sync-fever-plans.yml # Scheduled sync from Fever + regenerate
 ├── scripts/
 │   ├── generate-city-pages.js
+│   ├── fetch-fever-plans.js
 │   └── build-static.ps1
 ├── nginx.conf
 ├── Dockerfile
